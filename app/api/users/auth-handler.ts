@@ -1,7 +1,7 @@
 import {connectDB} from "@/db/connect"
 import mongoose from "mongoose"
 import { UserSchema } from "@/db/models/user"
-import { hashPassword, compare} from "@/lib/authenticate/password"
+import { compare} from "@/lib/authenticate/password"
 
 const user = mongoose.models.User || mongoose.model("User", UserSchema)
 

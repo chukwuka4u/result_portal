@@ -1,4 +1,4 @@
-import { authHandler } from "../../users/route"
+import { authHandler } from "../../users/auth-handler"
 
 describe("GET /api/users/login", () => {
   it("should get blessing, authenticating", async () => {
