@@ -5,7 +5,7 @@ const Teacher = () => {
     return(
         <>
         <div>THIS IS THE TEACHER PAGE</div>
-        <div>{session!.user!.email}</div>
+        <div>{session?.user?.email}</div>
         </>
     )
 }
