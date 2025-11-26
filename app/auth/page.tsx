@@ -67,7 +67,7 @@ const Login = () => {
               {isLoading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
-          <Button type="submit" className="w-full" onClick={() => signIn("google", { callbackUrl: "/" })}>
+          <Button type='button' className="w-full my-4" onClick={() => signIn("google", { callbackUrl: "/" })}>
               Login with Google
             </Button>
           <div className="mt-6 space-y-2 rounded-lg bg-muted p-4 text-sm">
