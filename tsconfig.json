@@ -30,6 +30,6 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts",
     "**.test.ts"
-  ],
+, "utils/scripts/create-admin.ts"  ],
   "exclude": ["node_modules"]
 }

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { signOut } from "next-auth/react"
 import { SignOutButton } from "@/components/signout-button";
 
 export default function Home() {
