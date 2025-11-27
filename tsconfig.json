@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-  ],
+    "**/*.mts",
+    "**.test.ts"
+, "utils/scripts/create-admin.ts"  ],
   "exclude": ["node_modules"]
 }
