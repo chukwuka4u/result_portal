@@ -10,8 +10,16 @@ export async function proxy(request: NextRequest) {
   // Get JWT token
   const token = await getToken({ req: request });
 
+  //check valid token
+  function validToken() {
+    if (token && token?.error)
+      return false
+    else
+      return true
+  }
+
   // If route is protected and user not logged in 
-  if (protectedRoutes.some((route) => pathname.startsWith(route)) && !token) {
+  if (protectedRoutes.some((route) => pathname.startsWith(route)) && !token && validToken()) {
     return NextResponse.redirect(new URL("/auth", request.url));
   }
 

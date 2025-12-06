@@ -11,12 +11,21 @@ export const UserSchema = new mongoose.Schema({
     required: true
   },
 
-  // For students
-  admissionNumber: String,
-  classId: { type: mongoose.Schema.Types.ObjectId, ref: "Class", required: false },
-
-  // For teachers
-  staffId: String,
+  studentProfile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "StudentProfile",
+    default: null
+  },
+  teacherProfile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TeacherProfile",
+    default: null
+  },
+  adminProfile: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "AdminProfile",
+    default: null
+  },
 
   createdAt: { type: Date, default: Date.now }
 });
