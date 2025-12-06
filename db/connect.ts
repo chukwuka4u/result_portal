@@ -1,7 +1,6 @@
 import mongoose from "mongoose"
 
-// const mongoUri = process.env.MONGO_URI!
-const mongoUri = "mongodb+srv://chukwukadiemma:pyYTt6jsI6bFKLKm@cluster1.lpcsfos.mongodb.net/result-portal?retryWrites=true&w=majority&appName=Cluster1"
+const mongoUri = process.env.MONGO_URI!
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let cached = (global as any).mongoose;
