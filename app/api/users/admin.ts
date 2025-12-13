@@ -17,7 +17,7 @@ const subject = mongoose.models.Subject || mongoose.model("Subject", SubjectSche
 
 //STUDENTS
 //create student
-async function createStudent( { firstName, lastName, email, password, role, admissionNumber, classId} : UserProp & StudentProfile) {
+async function createStudent( { name, classLevel, gender, dob, guardianName, guardianPhone, firstName, lastName, email, password, role, admissionNo, classId} : UserProp & StudentProfile) {
     await connectDB();
     const user = await AddUser(
         {
@@ -30,29 +30,46 @@ async function createStudent( { firstName, lastName, email, password, role, admi
     )
     const profile = await student.create(
         {
-        admissionNumber,
-        classId
+            name,
+            email,
+            classLevel,
+            gender,
+            dob,
+            guardianName,
+            guardianPhone,
+            admissionNo,
+            classId
         }
     )
     profile && (user.studentProfile = profile._id)
+    user && (profile.userId = user._id)
     await user.save()
+    await profile.save()
 
-    return {user, profile}
+    return JSON.parse(JSON.stringify({user, profile}))
 }
 //edit student
-async function editStudent(updatedObj: StudentProfile, admissionNumber: string) {
+async function editStudent(updatedObj: StudentProfile, admissionNo: string) {
     await connectDB();
 
-    const filterObj = {admissionNumber: admissionNumber}
+    const filterObj = {admissionNo}
     const usr = await student.updateOne(filterObj, updatedObj)
     return usr.upsertedId;
 }
 //view student list
-async function getStudents(classId : mongoose.Schema.Types.ObjectId) {
+async function getStudents() {
     await connectDB();
 
-    const usrs = await student.find({classId: classId})
-    return usrs
+    const usrs = await student.find()
+    return JSON.parse(JSON.stringify(usrs))
+}
+//delete student
+async function deleteStudent(id: string, user_id: string) {
+    await connectDB();
+
+    const delProf = await student.findByIdAndDelete(id)
+    const delUser = await DeleteUser(user_id!)
+    return JSON.parse(JSON.stringify({delProf, delUser}))
 }
 
 //TEACHERS
@@ -85,7 +102,6 @@ async function createTeacher( { firstName, lastName, email, password, role, name
     return JSON.parse(JSON.stringify({user, profile}))
 }
 //edit teacher
-//edit student
 async function editTeacher() {
     await connectDB();
 
@@ -111,6 +127,14 @@ async function getTeachers() {
     return JSON.parse(JSON.stringify(usrs))
 }
 
+//view all classes
+async function getClasses() {
+    await connectDB();
+
+    const classes = await classRoom.find()
+    return JSON.parse(JSON.stringify(classes))
+}
+
 //get all the stats i.e. no of teachers, students, classes, subjects
 async function getStats() {
     await connectDB();
@@ -124,4 +148,4 @@ async function getStats() {
     return stats
 }
 
-export {createStudent, editStudent, getStudents, createTeacher, editTeacher,  deleteTeacher,  getTeachers, getStats}
+export {createStudent, editStudent, getStudents, deleteStudent, createTeacher, editTeacher,  deleteTeacher,  getTeachers, getClasses, getStats}

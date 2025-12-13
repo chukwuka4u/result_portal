@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -10,11 +10,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { mockStudents, mockClasses, Student } from '@/lib/mockData';
 import { Plus, Pencil, Trash } from 'lucide-react';
 import { toast } from 'sonner';
+import { createStudent, deleteStudent, getStudents } from '@/app/api/users/admin';
 
 const Students = () => {
-  const [students, setStudents] = useState<Student[]>(mockStudents);
+  const [students, setStudents] = useState<Student[] | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    role: 'student',
     name: '',
     classLevel: '',
     gender: 'Male' as 'Male' | 'Female',
@@ -24,20 +30,29 @@ const Students = () => {
     guardianPhone: '',
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+
+  useEffect(() => {
+      (
+        async function () {
+          const s = await getStudents()
+          setStudents(s)
+          console.log(s)
+        }
+      )()
+    },[])
+  
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const newStudent: Student = {
-      id: `s${students.length + 1}`,
-      ...formData,
-    };
-    setStudents([...students, newStudent]);
+    const teacher = await createStudent({...formData, name: formData.firstName + " " + formData.lastName})
+    console.log(teacher)
     toast.success('Student added successfully');
     setIsOpen(false);
-    setFormData({ name: '', classLevel: '', gender: 'Male', dob: '', admissionNo: '', guardianName: '', guardianPhone: '' });
+    setFormData({ firstName: '', lastName: '', email: '', password: '', role: 'student', name: '', classLevel: '', gender: 'Male', dob: '', admissionNo: '', guardianName: '', guardianPhone: '' });
   };
 
-  const handleDelete = (id: string) => {
-    setStudents(students.filter(s => s.id !== id));
+  const handleDelete = async (id: string, userId: string) => {
+    const del = await deleteStudent(id, userId)
+        console.log(del)
     toast.success('Student deleted successfully');
   };
 
@@ -61,11 +76,20 @@ const Students = () => {
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Full Name</Label>
+                <Label htmlFor="name">First Name</Label>
                 <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  id="firstName"
+                  value={formData.firstName}
+                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="name">Last Name</Label>
+                <Input
+                  id="lastName"
+                  value={formData.lastName}
+                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                   required
                 />
               </div>
@@ -77,7 +101,7 @@ const Students = () => {
                   </SelectTrigger>
                   <SelectContent>
                     {mockClasses.map((cls) => (
-                      <SelectItem key={cls.id} value={cls.className}>{cls.className}</SelectItem>
+                      <SelectItem key={cls._id} value={cls.className}>{cls.className}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -93,6 +117,16 @@ const Students = () => {
                     <SelectItem value="Female">Female</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  required
+                />
               </div>
               <div className="space-y-2">
                 <Label htmlFor="dob">Date of Birth</Label>
@@ -139,7 +173,7 @@ const Students = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle>All Students ({students.length})</CardTitle>
+          <CardTitle>All Students ({students ? students.length : 0})</CardTitle>
         </CardHeader>
         <CardContent>
           <Table>
@@ -154,8 +188,10 @@ const Students = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {students.map((student) => (
-                <TableRow key={student.id}>
+              {students
+              ? 
+              students.map((student) => (
+                <TableRow key={student._id}>
                   <TableCell>{student.admissionNo}</TableCell>
                   <TableCell className="font-medium">{student.name}</TableCell>
                   <TableCell>{student.classLevel}</TableCell>
@@ -166,13 +202,18 @@ const Students = () => {
                       <Button variant="outline" size="sm">
                         <Pencil className="h-4 w-4" />
                       </Button>
-                      <Button variant="destructive" size="sm" onClick={() => handleDelete(student.id)}>
+                      <Button variant="destructive" size="sm" onClick={() => handleDelete(student._id, student.userId!)}>
                         <Trash className="h-4 w-4" />
                       </Button>
                     </div>
                   </TableCell>
                 </TableRow>
-              ))}
+              ))
+            :
+              <TableRow>
+                <TableCell>No Teacher Found</TableCell>
+              </TableRow>
+            }
             </TableBody>
           </Table>
         </CardContent>

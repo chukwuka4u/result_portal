@@ -108,7 +108,7 @@ const Teachers = () => {
                   </SelectTrigger>
                   <SelectContent>
                     {mockClasses.map((cls) => (
-                      <SelectItem key={cls.id} value={cls.className}>{cls.className}</SelectItem>
+                      <SelectItem key={cls._id} value={cls.className}>{cls.className}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
@@ -157,84 +157,6 @@ const Teachers = () => {
                   <TableCell>{teacher.assignedSubjects && teacher.assignedSubjects.join(', ')}</TableCell>
                   <TableCell>
                     <div className="flex gap-2">
-                      
-        {/* <Dialog open={isOpen} onOpenChange={setIsOpen}>
-          <DialogTrigger asChild>
-            <Button variant="outline" size="sm">
-                        <Pencil className="h-4 w-4" />
-                      </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Edit ONLY the fields to change</DialogTitle>
-            </DialogHeader>
-            <form onSubmit={() => {}} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">First Name</Label>
-                <Input
-                  id="firstName"
-                  value={formData.firstName}
-                  onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="name">Last Name</Label>
-                <Input
-                  id="lastName"
-                  value={formData.lastName}
-                  onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="name">Password</Label>
-                <Input
-                  id="name"
-                  type="password"
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="class">Assigned Class</Label>
-                <Select value={formData.assignedClass} onValueChange={(value) => setFormData({ ...formData, assignedClass: value })}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select class" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {mockClasses.map((cls) => (
-                      <SelectItem key={cls.id} value={cls.className}>{cls.className}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <Label htmlFor="class">Assigned Subjects</Label>
-                <Select onValueChange={(value) => setFormData({ ...formData, assignedSubjects: [value] })}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select subjects" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {mockSubjects.map((cls) => (
-                      <SelectItem key={cls.id} value={cls.subjectName}>{cls.subjectName}</SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <Button type="submit" className="w-full">Add Teacher</Button>
-            </form>
-          </DialogContent>
-        </Dialog> */}
                       <Button variant="destructive" size="sm" onClick={() => handleDelete(teacher._id, teacher.staffId!)}>
                         <Trash className="h-4 w-4" />
                       </Button>

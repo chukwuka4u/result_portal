@@ -17,10 +17,14 @@ describe(" users/admin", () => {
     const param = {
       firstName: "saphire",
       lastName: "Ebele",
+      name: "saphire Ebele",
       email: "saphire@gmail.com",
       password: "indomie123",
       role: "student",
-      admissionNumber: "54321"
+      admissionNo: "54321",
+      classLevel: "SS2",
+      gender: "Female" as ("Male" | "Female"),
+      dob: "11/11/2002"
     }
     const res = await createStudent(param)
     console.log(res)

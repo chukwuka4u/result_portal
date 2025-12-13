@@ -1,18 +1,43 @@
+"use client"
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { DialogHeader } from '@/components/ui/dialog';
 import { mockClasses } from '@/lib/mockData';
-import { School, User, BookOpen } from 'lucide-react';
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@radix-ui/react-dialog';
+import { School, User, BookOpen, Plus } from 'lucide-react';
+import { useState } from 'react';
 
 const Classes = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="space-y-6">
-      <div>
+      <div className="flex items-center justify-between">
+        <div>
         <h1 className="text-3xl font-bold">Classes Management</h1>
         <p className="text-muted-foreground">View and manage all classes</p>
+        </div>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <Button>
+              <Plus className="mr-2 h-4 w-4" />
+              Add Class
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>Add New Class</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={() => {}} className="space-y-4">
+              
+              <Button type="submit" className="w-full">Add Class</Button>
+            </form>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {mockClasses.map((cls) => (
-          <Card key={cls.id}>
+          <Card key={cls._id}>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <School className="h-5 w-5 text-primary" />

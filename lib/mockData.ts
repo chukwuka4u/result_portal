@@ -9,7 +9,7 @@ export interface Teacher {
 }
 
 export interface Student {
-  id: string;
+  _id: string;
   name: string;
   classLevel: string;
   gender: 'Male' | 'Female';
@@ -17,10 +17,12 @@ export interface Student {
   admissionNo: string;
   guardianName: string;
   guardianPhone: string;
+
+  userId?: string;
 }
 
 export interface Class {
-  id: string;
+  _id: string;
   className: string;
   classTeacher: string;
   subjects: string[];
@@ -57,16 +59,16 @@ export const mockTeachers: Teacher[] = [
 ];
 
 export const mockStudents: Student[] = [
-  { id: 's1', name: 'Jane Student', classLevel: 'SS3', gender: 'Female', dob: '2008-05-12', admissionNo: 'ADM001', guardianName: 'Mr. Student', guardianPhone: '08012345678' },
-  { id: 's2', name: 'Michael Brown', classLevel: 'SS3', gender: 'Male', dob: '2007-09-23', admissionNo: 'ADM002', guardianName: 'Mrs. Brown', guardianPhone: '08098765432' },
-  { id: 's3', name: 'Sarah Davis', classLevel: 'SS2', gender: 'Female', dob: '2008-03-15', admissionNo: 'ADM003', guardianName: 'Mr. Davis', guardianPhone: '08011122233' },
-  { id: 's4', name: 'Chris Wilson', classLevel: 'SS1', gender: 'Male', dob: '2009-11-30', admissionNo: 'ADM004', guardianName: 'Mrs. Wilson', guardianPhone: '08033344455' },
+  { _id: 's1', name: 'Jane Student', classLevel: 'SS3', gender: 'Female', dob: '2008-05-12', admissionNo: 'ADM001', guardianName: 'Mr. Student', guardianPhone: '08012345678' },
+  { _id: 's2', name: 'Michael Brown', classLevel: 'SS3', gender: 'Male', dob: '2007-09-23', admissionNo: 'ADM002', guardianName: 'Mrs. Brown', guardianPhone: '08098765432' },
+  { _id: 's3', name: 'Sarah Davis', classLevel: 'SS2', gender: 'Female', dob: '2008-03-15', admissionNo: 'ADM003', guardianName: 'Mr. Davis', guardianPhone: '08011122233' },
+  { _id: 's4', name: 'Chris Wilson', classLevel: 'SS1', gender: 'Male', dob: '2009-11-30', admissionNo: 'ADM004', guardianName: 'Mrs. Wilson', guardianPhone: '08033344455' },
 ];
 
 export const mockClasses: Class[] = [
-  { id: 'c1', className: 'SS3', classTeacher: 'John Teacher', subjects: ['Mathematics', 'Physics', 'Chemistry', 'English'] },
-  { id: 'c2', className: 'SS2', classTeacher: 'Mary Johnson', subjects: ['English', 'Literature', 'Biology', 'Chemistry'] },
-  { id: 'c3', className: 'SS1', classTeacher: 'David Wilson', subjects: ['Mathematics', 'Chemistry', 'Biology', 'English'] },
+  { _id: 'c1', className: 'SS3', classTeacher: 'John Teacher', subjects: ['Mathematics', 'Physics', 'Chemistry', 'English'] },
+  { _id: 'c2', className: 'SS2', classTeacher: 'Mary Johnson', subjects: ['English', 'Literature', 'Biology', 'Chemistry'] },
+  { _id: 'c3', className: 'SS1', classTeacher: 'David Wilson', subjects: ['Mathematics', 'Chemistry', 'Biology', 'English'] },
 ];
 
 export const mockSubjects: Subject[] = [
