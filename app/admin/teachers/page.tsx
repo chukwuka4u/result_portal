@@ -15,7 +15,7 @@ import { createTeacher, getTeachers, editTeacher, deleteTeacher } from '@/app/ap
 const Teachers = () => {
   const [teachers, setTeachers] = useState<Teacher[] | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState({ firstName: '', lastName: '', name: '', email: '', assignedClass: '', assignedSubjects: [] as string[], password: '', role: 'teacher', staffId: ''});
+  const [formData, setFormData] = useState({ firstName: '', lastName: '', name: '', email: '', assignedClass: '', assignedSubjects: [] as string[], password: '', role: 'teacher'});
   
   
   useEffect(() => {
@@ -39,7 +39,7 @@ const Teachers = () => {
     console.log(teacher)
     toast.success('Teacher added successfully');
     setIsOpen(false);
-    setFormData({firstName: '', lastName: '', name: '', email: '', assignedClass: '', assignedSubjects: [], password: '', role: 'teacher', staffId: '' });
+    setFormData({firstName: '', lastName: '', name: '', email: '', assignedClass: '', assignedSubjects: [], password: '', role: 'teacher'});
   };
   
 

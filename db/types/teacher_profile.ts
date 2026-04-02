@@ -5,5 +5,5 @@ export type TeacherProfile = {
     assignedSubjects?: string[];
     assignedClass?: string;
 
-    staffId: string
+    staffId?: string
 }

@@ -74,7 +74,7 @@ async function deleteStudent(id: string, user_id: string) {
 
 //TEACHERS
 //create teacher
-async function createTeacher( { firstName, lastName, email, password, role, name, staffId, assignedClass, assignedSubjects} : UserProp & TeacherProfile) {
+async function createTeacher( { firstName, lastName, email, password, role, name, assignedClass, assignedSubjects} : UserProp & TeacherProfile) {
     await connectDB();
     const user = await AddUser(
         {
@@ -90,8 +90,7 @@ async function createTeacher( { firstName, lastName, email, password, role, name
         name,
         email,
         assignedSubjects,
-        assignedClass,
-        staffId
+        assignedClass
         }
     )
     profile && (user.teacherProfile = profile._id)

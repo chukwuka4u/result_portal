@@ -43,10 +43,10 @@ const Students = () => {
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const teacher = await createStudent({...formData, name: formData.firstName + " " + formData.lastName})
+    const teacher = await createStudent({...formData, name: formData.firstName + " " + formData.lastName, password: formData.admissionNo})
     console.log(teacher)
-    toast.success('Student added successfully');
     setIsOpen(false);
+    toast.success('Student added successfully');
     setFormData({ firstName: '', lastName: '', email: '', password: '', role: 'student', name: '', classLevel: '', gender: 'Male', dob: '', admissionNo: '', guardianName: '', guardianPhone: '' });
   };
 

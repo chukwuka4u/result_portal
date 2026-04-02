@@ -2,7 +2,7 @@ export interface Teacher {
   _id: string;
   name: string;
   email: string;
-  assignedSubjects?: string[];
+  assignedSubjects: string[];
   assignedClass?: string;
 
   staffId?: string;
