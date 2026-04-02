@@ -110,7 +110,7 @@ async function editTeacher() {
     return usr.upsertedId;
 }
 
-//view all teachers
+//delete teachers
 async function deleteTeacher(id: string, user_id: string) {
     await connectDB();
 
@@ -126,6 +126,22 @@ async function getTeachers() {
     return JSON.parse(JSON.stringify(usrs))
 }
 
+//CLASSES
+//create a class
+async function createClass({ className, classTeacher, subjects} : {className: string, classTeacher: string, subjects: string}) {
+    await connectDB();
+
+    const subs = subjects.split(" ");
+    const cl = await classRoom.create(
+        {
+            name: className,
+            teacher: classTeacher,
+            subjects: subs
+        }
+    )
+    await cl.save()
+    return JSON.stringify(cl)
+}
 //view all classes
 async function getClasses() {
     await connectDB();
@@ -147,4 +163,4 @@ async function getStats() {
     return stats
 }
 
-export {createStudent, editStudent, getStudents, deleteStudent, createTeacher, editTeacher,  deleteTeacher,  getTeachers, getClasses, getStats}
+export {createStudent, editStudent, getStudents, deleteStudent, createTeacher, editTeacher,  deleteTeacher,  getTeachers, createClass, getClasses, getStats}

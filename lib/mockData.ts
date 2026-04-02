@@ -69,6 +69,9 @@ export const mockClasses: Class[] = [
   { _id: 'c1', className: 'SS3', classTeacher: 'John Teacher', subjects: ['Mathematics', 'Physics', 'Chemistry', 'English'] },
   { _id: 'c2', className: 'SS2', classTeacher: 'Mary Johnson', subjects: ['English', 'Literature', 'Biology', 'Chemistry'] },
   { _id: 'c3', className: 'SS1', classTeacher: 'David Wilson', subjects: ['Mathematics', 'Chemistry', 'Biology', 'English'] },
+  { _id: 'c4', className: 'JS3', classTeacher: 'John Teacher', subjects: ['Mathematics', 'Physics', 'Chemistry', 'English'] },
+  { _id: 'c5', className: 'JS2', classTeacher: 'Mary Johnson', subjects: ['English', 'Literature', 'Biology', 'Chemistry'] },
+  { _id: 'c6', className: 'JS1', classTeacher: 'David Wilson', subjects: ['Mathematics', 'Chemistry', 'Biology', 'English'] },
 ];
 
 export const mockSubjects: Subject[] = [
